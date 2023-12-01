@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>AppMvcTiered522</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppMvcTiered522.Domain\AppMvcTiered522.Domain.csproj" />
+    <ProjectReference Include="..\AppMvcTiered522.Application.Contracts\AppMvcTiered522.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.2.2" />
+  </ItemGroup>
+
+</Project>
