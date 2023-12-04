@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppMvcTiered522.Permissions;
+using System;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -18,5 +19,10 @@ public class BookAppService :
         IRepository<Book, Guid> repository
     ) : base(repository)
     {
+        GetPolicyName = AppMvcTiered522Permissions.Books.Default;
+        GetListPolicyName = AppMvcTiered522Permissions.Books.Default;
+        CreatePolicyName = AppMvcTiered522Permissions.Books.Create;
+        UpdatePolicyName = AppMvcTiered522Permissions.Books.Edit;
+        DeletePolicyName = AppMvcTiered522Permissions.Books.Delete;
     }
 }
