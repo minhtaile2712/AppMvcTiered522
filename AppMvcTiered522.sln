@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMvcTiered522.Domain", "src\AppMvcTiered522.Domain\AppMvcTiered522.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
@@ -38,6 +38,20 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMvcTiered522.HttpApi.Client.ConsoleTestApp", "test\AppMvcTiered522.HttpApi.Client.ConsoleTestApp\AppMvcTiered522.HttpApi.Client.ConsoleTestApp.csproj", "{EF480016-9127-4916-8735-D2466BDBC582}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMvcTiered522.DbMigrator", "src\AppMvcTiered522.DbMigrator\AppMvcTiered522.DbMigrator.csproj", "{AA94D832-1CCC-4715-95A9-A483F23A1A5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "share", "share", "{0351D2B1-72FB-4F3E-AA1B-FDF5EE0E295C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyShareModule", "MyShareModule", "{98226D61-E4BE-4F65-810B-21666B4517B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShareModule.Application", "share\MyShareModule\src\MyShareModule.Application\MyShareModule.Application.csproj", "{196C89A0-B520-4ABE-A407-47F87922C330}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShareModule.Application.Contracts", "share\MyShareModule\src\MyShareModule.Application.Contracts\MyShareModule.Application.Contracts.csproj", "{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShareModule.Domain", "share\MyShareModule\src\MyShareModule.Domain\MyShareModule.Domain.csproj", "{CB10884E-3C74-4F9A-9770-AC12DBBA1D00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShareModule.Domain.Shared", "share\MyShareModule\src\MyShareModule.Domain.Shared\MyShareModule.Domain.Shared.csproj", "{78BBB710-7677-48E0-9754-0F0A8DEED2EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyShareModule.EntityFrameworkCore", "share\MyShareModule\src\MyShareModule.EntityFrameworkCore\MyShareModule.EntityFrameworkCore.csproj", "{0B3B61CD-8521-446F-B7AE-F0D40F96FF34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +123,26 @@ Global
 		{AA94D832-1CCC-4715-95A9-A483F23A1A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA94D832-1CCC-4715-95A9-A483F23A1A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA94D832-1CCC-4715-95A9-A483F23A1A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{196C89A0-B520-4ABE-A407-47F87922C330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196C89A0-B520-4ABE-A407-47F87922C330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196C89A0-B520-4ABE-A407-47F87922C330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196C89A0-B520-4ABE-A407-47F87922C330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB10884E-3C74-4F9A-9770-AC12DBBA1D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB10884E-3C74-4F9A-9770-AC12DBBA1D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB10884E-3C74-4F9A-9770-AC12DBBA1D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB10884E-3C74-4F9A-9770-AC12DBBA1D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BBB710-7677-48E0-9754-0F0A8DEED2EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BBB710-7677-48E0-9754-0F0A8DEED2EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BBB710-7677-48E0-9754-0F0A8DEED2EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BBB710-7677-48E0-9754-0F0A8DEED2EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3B61CD-8521-446F-B7AE-F0D40F96FF34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3B61CD-8521-446F-B7AE-F0D40F96FF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3B61CD-8521-446F-B7AE-F0D40F96FF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3B61CD-8521-446F-B7AE-F0D40F96FF34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +164,12 @@ Global
 		{E512F4D9-9375-480F-A2F6-A46509F9D824} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 		{EF480016-9127-4916-8735-D2466BDBC582} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 		{AA94D832-1CCC-4715-95A9-A483F23A1A5D} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{98226D61-E4BE-4F65-810B-21666B4517B9} = {0351D2B1-72FB-4F3E-AA1B-FDF5EE0E295C}
+		{196C89A0-B520-4ABE-A407-47F87922C330} = {98226D61-E4BE-4F65-810B-21666B4517B9}
+		{5AA864C7-CA70-4CF9-89B1-C3FFBC5103E0} = {98226D61-E4BE-4F65-810B-21666B4517B9}
+		{CB10884E-3C74-4F9A-9770-AC12DBBA1D00} = {98226D61-E4BE-4F65-810B-21666B4517B9}
+		{78BBB710-7677-48E0-9754-0F0A8DEED2EA} = {98226D61-E4BE-4F65-810B-21666B4517B9}
+		{0B3B61CD-8521-446F-B7AE-F0D40F96FF34} = {98226D61-E4BE-4F65-810B-21666B4517B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
