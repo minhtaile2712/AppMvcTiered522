@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
@@ -54,6 +57,25 @@ public class AppMvcTiered522HttpApiHostModule : AbpModule
         ConfigureDataProtection(context, configuration, hostingEnvironment);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+
+        ConfigureOpenTelemetry(context, configuration);
+    }
+
+    private void ConfigureOpenTelemetry(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        context.Services.AddOpenTelemetry()
+            .ConfigureResource(b => b
+                .AddService(serviceName: "App522Host"))
+            .WithTracing(b => b
+                .AddAspNetCoreInstrumentation()
+                .AddEntityFrameworkCoreInstrumentation()
+                .AddGrpcClientInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddRedisInstrumentation()
+                .AddOtlpExporter(opt =>
+                {
+                    opt.Endpoint = new Uri(configuration["OtlpExporter:Endpoint"]);
+                }));
     }
 
     private void ConfigureCache(IConfiguration configuration)

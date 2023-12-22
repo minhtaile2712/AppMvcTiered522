@@ -1,21 +1,22 @@
-using System;
-using System.IO;
-using System.Linq;
+using AppMvcTiered522.EntityFrameworkCore;
+using AppMvcTiered522.Localization;
+using AppMvcTiered522.MultiTenancy;
 using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AppMvcTiered522.EntityFrameworkCore;
-using AppMvcTiered522.Localization;
-using AppMvcTiered522.MultiTenancy;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using StackExchange.Redis;
+using System;
+using System.IO;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -29,7 +30,6 @@ using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
 
 namespace AppMvcTiered522;
@@ -93,15 +93,15 @@ public class AppMvcTiered522IdentityServerModule : AbpModule
 
         Configure<AbpAuditingOptions>(options =>
         {
-                //options.IsEnabledForGetRequests = true;
-                options.ApplicationName = "AuthServer";
+            //options.IsEnabledForGetRequests = true;
+            options.ApplicationName = "AuthServer";
         });
 
         if (hostingEnvironment.IsDevelopment())
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                    options.FileSets.ReplaceEmbeddedByPhysical<AppMvcTiered522DomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}AppMvcTiered522.Domain.Shared"));
+                options.FileSets.ReplaceEmbeddedByPhysical<AppMvcTiered522DomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}AppMvcTiered522.Domain.Shared"));
                 options.FileSets.ReplaceEmbeddedByPhysical<AppMvcTiered522DomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}AppMvcTiered522.Domain"));
             });
         }
@@ -150,6 +150,25 @@ public class AppMvcTiered522IdentityServerModule : AbpModule
                     .AllowCredentials();
             });
         });
+
+        ConfigureOpenTelemetry(context, configuration);
+    }
+
+    private void ConfigureOpenTelemetry(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        context.Services.AddOpenTelemetry()
+            .ConfigureResource(b => b
+                .AddService(serviceName: "App522IdenServer"))
+            .WithTracing(b => b
+                .AddAspNetCoreInstrumentation()
+                .AddEntityFrameworkCoreInstrumentation()
+                .AddGrpcClientInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddRedisInstrumentation()
+                .AddOtlpExporter(opt =>
+                {
+                    opt.Endpoint = new Uri(configuration["OtlpExporter:Endpoint"]);
+                }));
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
